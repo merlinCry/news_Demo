@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title></title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <style>
+            *{margin:0;padding:0;}
+            *,
+            *:before,
+            *:after {
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+        *{font-size:16px;color:#000;line-height:1.2; word-break:break-all;white-space:normal; font-family:"HelveticaNeue-light";}
+            body{padding:18px;background-color:#FFF/*back-color-body*/;color:#333/*text-color-body*/;}
+            img {width:100%;height:auto;display:block; margin-bottom:5%; border-radius:2px;}
+            p {margin-bottom:5%;line-height:1.5;color:#333/*text-color-p*/;}
+            h2{font-size:22px;font-weight:600;line-height:1.2;margin-bottom: 4%; color:#000/*text-color-h2*/;}
+            h3{font-size:12px;font-weight:normal;margin: 4% 0; color:#999;}
+        </style>
+    </head>
+    
+    <body>
+      <script>
+          function imgClick(index) {
+              var rect = getImageRect(index);
+              var url  = "browse_img?index=" + index+ "&frame=" + rect;
+              document.location = url;
+          }
+      
+          function getImageRect(i){
+              var imgs = document.getElementsByTagName("img");
+              var rect = "{{";
+              
+              var  x = imgs[i].getBoundingClientRect().left;
+              var  y = imgs[i].getBoundingClientRect().top;
+              var  w = imgs[i].width;
+              var  h = imgs[i].height;
+              
+              rect = rect + x +"," + y + "},{" + w + "," + h + "}}";
+              
+              return rect;
+          }
+          function getImageData(i){
+              var imgs = document.getElementsByTagName("img");
+              var img=imgs[i];
+              var canvas   = document.createElement("canvas");
+              var context  = canvas.getContext("2d");
+              canvas.width = img.width; canvas.height=img.height;
+              context.drawImage(img,0,0,img.width,img.height);
+              return canvas.toDataURL("image/png") 
+          }
+         function reSetImage(ref,src){
+            var mediaElement = document.getElementById(ref);
+            mediaElement.src = src;
+
+         }
+      </script>
+    <p>mainnews</p>
+  </body>
+</html>
